@@ -2,7 +2,7 @@
 
 ORGA=lopsided
 TAR_DATE=${TAR_DATE:-$(date +'%Y.%m')}
-ARCH=armv6h
+ARCH=armv7h
 
 for repo in archlinux-${ARCH} archlinux-${ARCH}:full archlinux-${ARCH}:devel; do
 	IFS=: read repo tag <<< $repo

@@ -2,7 +2,7 @@
 
 ORGA=lopsided
 TAR_DATE=${TAR_DATE:-$(date +'%Y.%m')}
-ARCH=armv6h
+ARCH=armv7h
 ARCHLINUX_MIRR=http://os.archlinuxarm.org/os/rpi
 
 [ $UID -ne 0 ] && echo "This script should get executed as root. Otherwise file special permissions are not set correctly." >&2
@@ -15,18 +15,18 @@ mkdir -p tarballs/${TAR_DATE}
 (
 cd tarballs/${TAR_DATE} \
 && wget -q --no-cookies \
-	${ARCHLINUX_MIRR}/ArchLinuxARM-${TAR_DATE}-rpi-rootfs.tar.gz{,.sig,.md5} \
-&& md5sum --check ArchLinuxARM-${TAR_DATE}-rpi-rootfs.tar.gz.md5
+	${ARCHLINUX_MIRR}/ArchLinuxARM-${TAR_DATE}-armv7-rootfs.tar.gz{,.sig,.md5} \
+&& md5sum --check ArchLinuxARM-${TAR_DATE}-armv7-rootfs.tar.gz.md5
 )
 
 # Verify the data by its gpg-signature
 # https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch
 gpg --keyserver-options auto-key-retrieve \
-	--verify tarballs/${TAR_DATE}/ArchLinuxARM-${TAR_DATE}-rpi-rootfs.tar.gz.sig
+	--verify tarballs/${TAR_DATE}/ArchLinuxARM-${TAR_DATE}-armv7-rootfs.tar.gz.sig
 
 tar xz \
     --warning=none \
-	-f tarballs/${TAR_DATE}/ArchLinuxARM-${TAR_DATE}-rpi-rootfs.tar.gz \
+	-f tarballs/${TAR_DATE}/ArchLinuxARM-${TAR_DATE}-armv7-rootfs.tar.gz \
 	--strip-components=1 \
 	--directory=./Dockerfiles/basement/arch-rootfs
 

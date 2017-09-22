@@ -1,4 +1,4 @@
-FROM lopsided/archlinux-armv6h:devel-currenttar
+FROM lopsided/archlinux-armv7h:devel-currenttar
 LABEL maintainer "ArchLinux Dockerimage Maintainers"
 
 RUN    pacman --noconfirm -Syu \

@@ -1,4 +1,4 @@
-FROM lopsided/archlinux-armv6h:full-currenttar
+FROM lopsided/archlinux-armv7h:full-currenttar
 LABEL maintainer "lopsided"
 
 RUN    pacman --noconfirm -Syu --needed base-devel \

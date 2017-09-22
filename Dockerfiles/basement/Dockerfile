@@ -19,7 +19,8 @@ RUN : \
          dhcpcd \
          iproute2 \
          jfsutils \
-         linux-raspberrypi \
+         linux-armv7 \
+         linux-firmware \
          lvm2 \
          man-db \
          man-pages \
@@ -28,16 +29,11 @@ RUN : \
          netctl \
          openresolv \
          pciutils \
-         raspberrypi-bootloader \
-         raspberrypi-bootloader-x \
-         raspberrypi-firmware \
          reiserfsprogs \
          s-nail \
          systemd-sysvcompat \
          usbutils \
          vi \
-         wireless_tools \
-         wpa_supplicant \
          xfsprogs \
     && rm -rf \
       /usr/share/man/* \

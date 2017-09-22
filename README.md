@@ -1,8 +1,8 @@
 # Obsolete: replaced by https://github.com/lopsided98/archlinux-docker
 
-# Basic Arch Linux images [![Build Status](https://travis-ci.org/lopsided98/archlinux.svg?branch=armv6h)](https://travis-ci.org/lopsided98/archlinux)
+# Basic Arch Linux images [![Build Status](https://travis-ci.org/lopsided98/archlinux.svg?branch=armv7h)](https://travis-ci.org/lopsided98/archlinux)
 
-Docker images for Arch Linux on armv6h. Built daily by Travis CI on publicly visible infrastructure.
+Docker images for Arch Linux on armv7h. Built daily by Travis CI on publicly visible infrastructure.
 
 Based off of https://github.com/archimg/archlinux
 
@@ -10,8 +10,8 @@ Based off of https://github.com/archimg/archlinux
 
 The images are on [Docker Hub](https://hub.docker.com/u/lopsided/). Use the convenient `docker run`:
 
-    docker run --rm -ti lopsided/archlinux-armv6h
-    docker run --rm -ti lopsided/archlinux-armv6h:devel
+    docker run --rm -ti lopsided/archlinux-armv7h
+    docker run --rm -ti lopsided/archlinux-armv7h:devel
 
 ## Tags
 
