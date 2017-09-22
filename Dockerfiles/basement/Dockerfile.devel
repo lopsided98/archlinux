@@ -1,0 +1,11 @@
+FROM lopsided/archlinux-armv6h:full-currenttar
+LABEL maintainer "lopsided"
+
+RUN    pacman --noconfirm -Syu --needed base-devel \
+    && rm -f \
+      /var/cache/pacman/pkg/* \
+      /var/lib/pacman/sync/* \
+      /README \
+      /etc/pacman.d/mirrorlist.pacnew
+
+CMD ["/bin/bash"]

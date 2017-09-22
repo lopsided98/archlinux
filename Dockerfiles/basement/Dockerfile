@@ -1,5 +1,5 @@
 FROM scratch
-LABEL maintainer "ArchLinux Dockerimage Maintainers"
+LABEL maintainer "lopsided"
 
 ADD arch-rootfs/ /
 ADD additional/ /
@@ -10,7 +10,7 @@ RUN : \
     # if the umask is not ``
     && chmod 755 /etc \
     && pacman-key --init \
-    && pacman-key --populate archlinux \
+    && pacman-key --populate archlinuxarm \
     && pacman --noconfirm -Syu --needed base \
     # remove unneccessary packages again
     && pacman --noconfirm -Rsc \
@@ -19,7 +19,7 @@ RUN : \
          dhcpcd \
          iproute2 \
          jfsutils \
-         linux \
+         linux-raspberrypi \
          lvm2 \
          man-db \
          man-pages \
@@ -28,11 +28,16 @@ RUN : \
          netctl \
          openresolv \
          pciutils \
+         raspberrypi-bootloader \
+         raspberrypi-bootloader-x \
+         raspberrypi-firmware \
          reiserfsprogs \
          s-nail \
          systemd-sysvcompat \
          usbutils \
          vi \
+         wireless_tools \
+         wpa_supplicant \
          xfsprogs \
     && rm -rf \
       /usr/share/man/* \

@@ -1,30 +1,30 @@
-# Basic Arch Linux images [![Build Status](https://travis-ci.org/archimg/archlinux.svg?branch=master)](https://travis-ci.org/archimg/archlinux)
+# Basic Arch Linux images [![Build Status](https://travis-ci.org/lopsided98/archlinux.svg?branch=armv6h)](https://travis-ci.org/lopsided98/archlinux)
 
-Docker images for Arch Linux. Built daily by Travis CI on publicly visible infrastructure.
+Docker images for Arch Linux on armv6h. Built daily by Travis CI on publicly visible infrastructure.
+
+Based off of https://github.com/archimg/archlinux
 
 ## Running the images
 
-The images are on [Docker Hub](https://hub.docker.com/u/archimg/). Use the convenient `docker run`:
+The images are on [Docker Hub](https://hub.docker.com/u/lopsided/). Use the convenient `docker run`:
 
-    docker run --rm -ti archimg/base
-    docker run --rm -ti archimg/base-devel
+    docker run --rm -ti lopsided/archlinux-armv6h
+    docker run --rm -ti lopsided/archlinux-armv6h:devel
 
 ## Tags
 
-|         Repo         |  Tag   |  Update   |  Type   |                                                             Description                                                              |
-|:---------------------|:------:|:---------:|:-------:|:-------------------------------------------------------------------------------------------------------------------------------------|
-| base                 | latest | **daily** | minimal | most packages of base-group, except some big ones like [`linux-firmware`](./Dockerfiles/basement/Dockerfile.base)                    |
-| base                 | full   | **daily** |   full  | all packages of base-group                                                                                                           |
-| base&#8209;devel     | latest | **daily** |   full  | all packages of base and base-devel-group                                                                                            |
-
-**The monthly tagged images aren't supposed to be used in production.** Arch Linux is a rolling release distro and [partial upgrades are unsupported there](https://wiki.archlinux.org/index.php?title=System_maintenance#Partial_upgrades_are_unsupported). It requires you to always do a full system upgrade, so it wouldn't make any difference to use the `latest` tag.
+|  Tag   |  Update   |  Type   |                                                             Description                                                              |
+|:------:|:---------:|:-------:|:-------------------------------------------------------------------------------------------------------------------------------------|
+| latest | **daily** | minimal | most packages of base-group, except some big ones like [some big ones like `linux-firmware`](./Dockerfiles/basement/Dockerfile)      |
+| full   | **daily** |   full  | all packages of base-group                                                                                                           |
+| devel  | **daily** |   full  | all packages of base and base-devel-group                                                                                            |
 
 ### Layer structure
 
 The image consists of two parts:
 
 - the _[basement layer](./Dockerfiles/basement)_, derived from the tarball (updated monthly)
-  - this layer has always its own tag in form of `YEAR.MONTH.01`
+  - this layer has always its own tag in form of `YEAR.MONTH`
   - it's discouraged to use this as your base image
 - the _[update layer](./Dockerfiles/updates)_, which only contains the updates (updated daily)
   - this layer has always its own tag as latest
@@ -33,7 +33,7 @@ This implies, that you get daily updates, but only have to download the actual c
 
 ## Issues and improvements
 
-If you want to contribute, get to the [issues-section of this repository](https://github.com/archimg/archlinux/issues).
+If you want to contribute, get to the [issues-section of this repository](https://github.com/lopsided98/archlinux/issues).
 
 ## Common hurdles
 

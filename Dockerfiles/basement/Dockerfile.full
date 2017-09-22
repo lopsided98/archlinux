@@ -1,5 +1,5 @@
 FROM scratch
-LABEL maintainer "ArchLinux Dockerimage Maintainers"
+LABEL maintainer "lopsided"
 
 ADD arch-rootfs/ /
 ADD additional/ /
@@ -10,7 +10,7 @@ RUN : \
     # if the umask is not ``
     && chmod 755 /etc \
     && pacman-key --init \
-    && pacman-key --populate archlinux \
+    && pacman-key --populate archlinuxarm \
     && pacman --noconfirm -Syu --needed base \
     && rm -f \
       /var/cache/pacman/pkg/* \

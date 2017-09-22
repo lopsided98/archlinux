@@ -1,9 +1,9 @@
 #!/bin/bash -ex
 
-ORGA=archimg
-TAR_DATE=${TAR_DATE:-$(date +'%Y.%m.01')}
-ARCHLINUX_ARCH=x86_64
-ARCHLINUX_MIRR=https://archive.archlinux.org/iso
+ORGA=lopsided
+TAR_DATE=${TAR_DATE:-$(date +'%Y.%m')}
+ARCH=armv6h
+ARCHLINUX_MIRR=http://os.archlinuxarm.org/os/rpi
 
 [ $UID -ne 0 ] && echo "This script should get executed as root. Otherwise file special permissions are not set correctly." >&2
 
@@ -15,26 +15,26 @@ mkdir -p tarballs/${TAR_DATE}
 (
 cd tarballs/${TAR_DATE} \
 && wget -q --no-cookies \
-	${ARCHLINUX_MIRR}/${TAR_DATE}/archlinux-bootstrap-${TAR_DATE}-${ARCHLINUX_ARCH}.tar.gz{,.sig} \
-	${ARCHLINUX_MIRR}/${TAR_DATE}/sha1sums.txt \
-&& grep archlinux-bootstrap-${TAR_DATE}-${ARCHLINUX_ARCH}.tar.gz sha1sums.txt \
-	| sha1sum --check -
+	${ARCHLINUX_MIRR}/ArchLinuxARM-${TAR_DATE}-rpi-rootfs.tar.gz{,.sig,.md5} \
+&& md5sum --check ArchLinuxARM-${TAR_DATE}-rpi-rootfs.tar.gz.md5
 )
 
 # Verify the data by its gpg-signature
 # https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch
 gpg --keyserver-options auto-key-retrieve \
-	--verify tarballs/${TAR_DATE}/archlinux-bootstrap-${TAR_DATE}-${ARCHLINUX_ARCH}.tar.gz.sig
+	--verify tarballs/${TAR_DATE}/ArchLinuxARM-${TAR_DATE}-rpi-rootfs.tar.gz.sig
 
 tar xz \
-	-f tarballs/${TAR_DATE}/archlinux-bootstrap-${TAR_DATE}-${ARCHLINUX_ARCH}.tar.gz \
+    --warning=none \
+	-f tarballs/${TAR_DATE}/ArchLinuxARM-${TAR_DATE}-rpi-rootfs.tar.gz \
 	--strip-components=1 \
-	--directory=./Dockerfiles/basement/arch-rootfs \
-	root.${ARCHLINUX_ARCH}/
+	--directory=./Dockerfiles/basement/arch-rootfs
 
-for repo in base::squash base:full:squash base-devel::nosquash; do
+cp /usr/bin/qemu-arm-static ./Dockerfiles/basement/arch-rootfs/usr/bin/qemu-arm-static
+
+for repo in archlinux-${ARCH}::squash archlinux-${ARCH}:full:squash archlinux-${ARCH}:devel:nosquash; do
 	IFS=: read repo tag opt <<< $repo
-	docker build -f ./Dockerfiles/basement/Dockerfile.${repo}${tag:+_$tag} -t ${ORGA}/${repo}:${tag:+$tag-}${TAR_DATE} ./Dockerfiles/basement
+	docker build -f ./Dockerfiles/basement/Dockerfile${tag:+.$tag} -t ${ORGA}/${repo}:${tag:+$tag-}${TAR_DATE} ./Dockerfiles/basement
 	if [ "${opt}" == "squash" ]; then
 		docker-squash ${ORGA}/${repo}:${tag:+$tag-}${TAR_DATE}
 	fi

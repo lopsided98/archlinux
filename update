@@ -1,9 +1,10 @@
 #!/bin/bash -ex
 
-ORGA=archimg
-TAR_DATE=${TAR_DATE:-$(date +'%Y.%m.01')}
+ORGA=lopsided
+TAR_DATE=${TAR_DATE:-$(date +'%Y.%m')}
+ARCH=armv6h
 
-for repo in base base:full base-devel; do
+for repo in archlinux-${ARCH} archlinux-${ARCH}:full archlinux-${ARCH}:devel; do
 	IFS=: read repo tag <<< $repo
-	docker build -f ./Dockerfiles/updates/Dockerfile.${repo}${tag:+_$tag} -t ${ORGA}/${repo}${tag:+:$tag} ./Dockerfiles/updates
+	docker build -f ./Dockerfiles/updates/Dockerfile${tag:+.$tag} -t ${ORGA}/${repo}${tag:+:$tag} ./Dockerfiles/updates
 done

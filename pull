@@ -1,9 +1,10 @@
 #!/bin/bash -ex
 
-ORGA=archimg
-TAR_DATE=${TAR_DATE:-$(date +'%Y.%m.01')}
+ORGA=lopsided
+TAR_DATE=${TAR_DATE:-$(date +'%Y.%m')}
+ARCH=armv6h
 
-for repo in base base:full base-devel; do
+for repo in archlinux-${ARCH} archlinux-${ARCH}:full archlinux-${ARCH}:devel; do
 	IFS=: read repo tag <<< $repo
 	docker pull ${ORGA}/${repo}:${tag:+$tag-}${TAR_DATE}
 	# alias the image with name currenttar instead of actual date to get referenced by static dockerfiles
