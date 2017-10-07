@@ -4,9 +4,8 @@ services:
   - docker
 install:
   - sudo pip install https://github.com/goldmann/docker-squash/archive/master.zip
-  # On 1. day, still use last month's tarfile,
-  # the latest one may not be on the mirror yet
-  - export TAR_DATE=$(date --date=yesterday +'%Y.%m')
+  # Tarball seems to be updated on the 10th, so wait for it to update
+  - export TAR_DATE=$(date --date='11 days ago' +'%Y.%m')
   - sudo mkdir -p /root/.gnupg
   - echo no-greeting                              | sudo tee -a /root/.gnupg/gpg.conf
   - echo keyserver hkp://pool.sks-keyservers.net  | sudo tee -a /root/.gnupg/gpg.conf
