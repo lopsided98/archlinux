@@ -1,0 +1,16 @@
+image: lopsided/archlinux:latest
+manifests:
+  - image: lopsided/archlinux-armv6h:latest
+    platform:
+      architecture: arm
+      variant: armv6l
+      os: linux
+  - image: lopsided/archlinux-armv7h:latest
+    platform:
+      architecture: arm
+      variant: armv7l
+      os: linux
+  - image: base/archlinux:latest
+    platform:
+      architecture: amd64
+      os: linux

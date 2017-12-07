@@ -8,4 +8,5 @@ for repo in archlinux-${ARCH} archlinux-${ARCH}:full archlinux-${ARCH}:devel; do
 	IFS=: read repo tag <<< $repo
 	docker push ${ORGA}/${repo}:${tag:+$tag-}${TAR_DATE}
 	docker push ${ORGA}/${repo}${tag:+:$tag}
+	"${GOPATH}/bin/manifest-tool" push from-spec "./manifests/manifest${tag:+-$tag}.yml"
 done
