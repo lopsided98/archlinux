@@ -1,3 +1,5 @@
+# Obsolete: replaced by https://github.com/lopsided98/archlinux-docker
+
 # Basic Arch Linux images [![Build Status](https://travis-ci.org/lopsided98/archlinux.svg?branch=armv6h)](https://travis-ci.org/lopsided98/archlinux)
 
 Docker images for Arch Linux on armv6h. Built daily by Travis CI on publicly visible infrastructure.
